@@ -6,18 +6,12 @@ def add(data, name):
     db = client['StataBot']
     collection = db[name]
     
-    
-    last_order_date=collection.find().sort("_id", -1).limit(1)["DATE"]
-    print(last_order_date)
     orders=[]
 
     for row in data:
-        row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
-        if row["DATE"] < last_order_date:
-            if row["ENTRY"] !=0:
-                orders.append(row)
-        else: 
-            break
+        if row["ENTRY"] !=0:
+            row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
+            orders.append(row)
 
     collection.insert_many(orders)   
 
