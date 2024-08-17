@@ -5,14 +5,18 @@ def add(data, name):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
     db = client['StataBot']
     collection = db[name]
-
+    
+    
+    last_order_date=collection.find().sort("_id", -1).limit(1)["DATE"]
     orders=[]
 
     for row in data:
-        if row["ENTRY"] !=0:
-            orders.append(row)
-    for row in orders:
         row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
+        if row["DATE"] < last_order_date:
+            if row["ENTRY"] !=0:
+                orders.append(row)
+        else: 
+            break
 
     collection.insert_many(orders)   
 
