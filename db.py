@@ -9,9 +9,8 @@ def add(data, name):
     orders=[]
 
     for row in data:
-        if row["ENTRY"] !=0:
-            row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
-            orders.append(row)
+        row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
+        orders.append(row)
 
     collection.insert_many(orders)   
 
