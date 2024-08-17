@@ -7,7 +7,7 @@ def add(data, name):
     collection = db[name]
     
     last_order_date=collection.find().sort("_id", -1).limit(1)
-    print(last_order_date)
+    print(last_order_date["DATE"])
     orders=[]
 
     for row in data:
