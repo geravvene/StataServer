@@ -8,6 +8,7 @@ def add(data, name):
     
     
     last_order_date=collection.find().sort("_id", -1).limit(1)["DATE"]
+    print(last_order_date)
     orders=[]
 
     for row in data:
