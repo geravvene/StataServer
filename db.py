@@ -6,8 +6,8 @@ def add(data, name):
     db = client['StataBot']
     collection = db[name]
     
-    last_order_date=collection.find().sort("_id", -1).limit(1)
-    print(last_order_date["DATE"])
+    last_order_date=collection.find().sort("_id", -1).limit(1)[0]["DATE"]
+    print(last_order_date)
     orders=[]
 
     for row in data:
