@@ -16,7 +16,7 @@ def add(data, name):
             orders.append(row)
         else: 
             break
-
+    orders.reverse()
     collection.insert_many(orders)   
 
 
