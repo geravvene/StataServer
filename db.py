@@ -10,7 +10,6 @@ def add(data, name):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
     db = client['StataBot']
     collection = db[name]
-    print(data)
     orders=[]
     try:
         last_date=''
