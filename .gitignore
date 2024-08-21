@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 add.py
 StataBot.Dubrovskiy.json
+calc.py
+StataBot.Dubrovskiy2.json
