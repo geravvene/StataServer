@@ -11,11 +11,11 @@ def main():
 @app.route('/add/<name>', methods=['POST'])
 def success(name):
     if request.method == 'POST':
-        try:
-            db.add(request.json.get('content', None), name)
-        except Exception as err:
-            print(type(err))
+      
+        db.add(request.json.get('content', None), name)
+        
+        
         return "Nice"
 
 if __name__ == '__main__':
-  app.run(port=5000)
+  app.run(port=443)

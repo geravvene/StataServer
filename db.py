@@ -10,28 +10,28 @@ def add(data, name):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
     db = client['StataBot']
     collection = db[name]
-    
+    print(data)
     orders=[]
     try:
         last_date=''
         with open("date.txt", "r") as file:
-            last_date = datetime.strptime(file.readline(), '%Y.%m.%d %H:%M:%S.')
+            last_date = datetime.strptime(file.readline(), '%Y.%m.%d %H:%M:%S')
         print(last_date)
         for row in data:
-            row["DATE"]=datetime.strptime(row["DATE"]["$date"], '%Y-%m-%dT%H:%M:%S.000Z')
+            row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
             if row["DATE"]>last_date:
                 orders.append(row)
             else:
                 with open("date.txt", "w+") as file:
-                    file.write(datetime.strftime(orders[0]["DATE"]["$date"], '%Y.%m.%d %H:%M:%S.'))
+                    file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
                 break                          
     except:
         orders=data
         for row in orders:
-            row["DATE"]=datetime.strptime(row["DATE"]["$date"], '%Y-%m-%dT%H:%M:%S.000Z')
+            row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
             row['TYPE']= 's' if row['TYPE']==1 else 'b'
         with open("date.txt", "w+") as file:
-            file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S.'))
+            file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
         
     sub1='to #' 
     removes=[]
