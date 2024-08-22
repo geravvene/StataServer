@@ -46,10 +46,12 @@ def add(data, name):
                 else:
                     return int(row['COMMENT'].replace(sub1,''))
         else:
-            if 'from #' in row['COMMENT']:
-                return row['COMMENT'][-4:][1 : -1] 
+            if 'sl' in row['COMMENT']:
+                return 'sl' 
+            elif 'tp' in row['COMMENT']:
+                return 'tp'
             else:
-                return row['COMMENT'][1 : -1]  
+                return ''  
         
     for row in orders:
         row['end']=rec_order(row)
