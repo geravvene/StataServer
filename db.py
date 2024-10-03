@@ -8,7 +8,7 @@ def find_by_key(iterable, key, value):
         
 def add(data, name, last_date):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
-    db = client['StataBotTEST']
+    db = client['StataBot']
     collection = db[name]
     orders=[]
     if last_date!=0:

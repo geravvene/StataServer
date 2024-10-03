@@ -1,8 +1,9 @@
 from flask import Flask, request
+from datetime import datetime
 
 import db
 app = Flask(__name__)
-last_date=0
+last_date=datetime(2024,10,2,10,13,22)
 
 
 @app.route("/")
