@@ -8,7 +8,7 @@ def find_by_key(iterable, key, value):
         
 def add(data, name):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
-    db = client['StataBot']
+    db = client['StataBotTEST']
     collection = db[name]
     orders=[]
     try:
