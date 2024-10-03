@@ -2,6 +2,7 @@ from flask import Flask, request
 
 import db
 app = Flask(__name__)
+last_date=0
 
 
 @app.route("/")
@@ -11,10 +12,8 @@ def main():
 @app.route('/add/<name>', methods=['POST'])
 def success(name):
     if request.method == 'POST':
-      
-        db.add(request.json.get('content', None), name)
-        
-        
+        global last_date
+        last_date=db.add(request.json.get('content', None), name, last_date)
         return "Nice"
 
 if __name__ == '__main__':

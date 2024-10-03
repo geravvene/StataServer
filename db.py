@@ -6,34 +6,28 @@ def find_by_key(iterable, key, value):
         if dict_[key] == value:
             return index
         
-def add(data, name):
+def add(data, name, last_date):
     client = MongoClient("mongodb+srv://geravvene:NJxN8XPdTKMe84YF@wordigma.rmxf6nd.mongodb.net/")
     db = client['StataBotTEST']
     collection = db[name]
     orders=[]
-    try:
-        last_date=''
-        with open("date.txt", "r") as file:
-            last_date = datetime.strptime(file.readline(), '%Y.%m.%d %H:%M:%S')
-        print(last_date)
+    if last_date!=0:
         for row in data:
             row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
             if row["DATE"]>last_date:
                 orders.append(row)
             else:
-                with open("date.txt", "w+") as file:
-                    file.write(datetime.strftime(data[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
+                last_date=orders[0]["DATE"] if len(orders)==0 else last_date 
                 break                          
-    except:
+    else:
         orders=data
         for row in orders:
             row["DATE"]=datetime.strptime(row["DATE"], '%Y.%m.%d %H:%M:%S')
             row['TYPE']= 's' if row['TYPE']==1 else 'b'
-        with open("date.txt", "w+") as file:
-            file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
+        last_date=orders[0]["DATE"]
         
     if len(orders)==0:
-        return
+        return last_date
     
     sub1='to #' 
     removes=[]
@@ -80,5 +74,6 @@ def add(data, name):
             
     orders.reverse()
     collection.insert_many(orders)
+    return last_date
 
 
