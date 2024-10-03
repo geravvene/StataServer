@@ -17,7 +17,7 @@ def add(data, name, last_date):
             if row["DATE"]>last_date:
                 orders.append(row)
             else:
-                last_date=orders[0]["DATE"] if len(orders)==0 else last_date 
+                last_date=orders[0]["DATE"] if len(orders)!=0 else last_date 
                 break                          
     else:
         orders=data
