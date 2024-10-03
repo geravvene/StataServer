@@ -22,7 +22,7 @@ def add(data, name):
                 orders.append(row)
             else:
                 with open("date.txt", "w+") as file:
-                    file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
+                    file.write(datetime.strftime(data[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
                 break                          
     except:
         orders=data
@@ -32,6 +32,9 @@ def add(data, name):
         with open("date.txt", "w+") as file:
             file.write(datetime.strftime(orders[0]["DATE"], '%Y.%m.%d %H:%M:%S'))
         
+    if len(orders)==0:
+        return
+    
     sub1='to #' 
     removes=[]
 
